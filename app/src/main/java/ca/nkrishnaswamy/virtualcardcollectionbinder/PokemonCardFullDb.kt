@@ -6,4 +6,5 @@ object PokemonCardFullDb {
     fun getPokemonDb(): ArrayList<PokemonCardPage>{
         return pokemonCardDb
     }
+
 }

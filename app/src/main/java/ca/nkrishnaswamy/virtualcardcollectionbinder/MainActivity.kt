@@ -15,12 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        jsonParse()
+        jsonParsePokemon("https://api.pokemontcg.io/v1/cards?page=", "{\"cards\":[]}")
     }
-    fun jsonParse(){
+    fun jsonParsePokemon(url: String, endBody: String){
         Thread {
-
-            val url = "https://api.pokemontcg.io/v1/cards?page="
             var pageNum = 1
             var isEmpty=false
 
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     client.newCall(request).execute().use { response ->
                         val body = response.body?.string()
 
-                        if (body == "{\"cards\":[]}") {
+                        if (body == endBody) {
                             isEmpty=true
                             //println("Page $pageNum is empty")
                         }
@@ -42,17 +40,29 @@ class MainActivity : AppCompatActivity() {
 
                             val pokemonPage = gson.fromJson(body, PokemonCardPage::class.java)
                             PokemonCardFullDb.getPokemonDb().add(pokemonPage)
+
+                            //println("Page Num: $pageNum")
+                            //println(PokemonCardFullDb.getPokemonDb().size)
+                            pageNum++
                         }
                     }
-                    //println("Page Num: $pageNum")
-                    //println(PokemonCardFullDb.getPokemonDb().size)
-                    pageNum++
                 }
-                //println("The size of the full Pokemon Database is: ${PokemonCardFullDb.getPokemonDb().size}")
 
             } catch (e: IOException) {
                 println("Parsing failed: $e")
             }
+            var totalCount=0
+            for (page in PokemonCardFullDb.getPokemonDb()){
+                totalCount += page.getPokemonCardPages().size
+            }
+            println("There are $totalCount cards in the complete database.")
+
+            //var name = "charizard"                            //all this code is to test filtering and adding functionalities to the user's collection
+            //var hp = "120"
+            //UserPokemonCardCollection.pokemonCollectionAdder(name, hp)
+            //for (x in UserPokemonCardCollection.getPokemonCollection()){
+                //println(x.toString())
+            //}
         }.start()
     }
 }
