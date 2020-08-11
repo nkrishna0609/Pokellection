@@ -7,4 +7,5 @@ class PokemonCardWeaknesses (private val type: String, private val value: String
 
     fun getPokemonWeaknessAmount():String{
         return value
-    }}
+    }
+}

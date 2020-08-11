@@ -1,5 +1,6 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder
 
+import android.database.DatabaseUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,12 +12,16 @@ import okhttp3.*
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+
+    internal var pokemonDbHelper=CompletePokemonCardDatabaseOperations(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         jsonParsePokemon("https://api.pokemontcg.io/v1/cards?page=", "{\"cards\":[]}")
     }
+
     fun jsonParsePokemon(url: String, endBody: String){
         Thread {
             var pageNum = 1
@@ -39,10 +44,18 @@ class MainActivity : AppCompatActivity() {
                             val gson = GsonBuilder().create()
 
                             val pokemonPage = gson.fromJson(body, PokemonCardPage::class.java)
-                            PokemonCardFullDb.getPokemonDb().add(pokemonPage)
+                            for (card in pokemonPage.getPokemonCardPages()){
+                                pokemonDbHelper.insertCard(card)
+                            }
 
                             //println("Page Num: $pageNum")
-                            //println(PokemonCardFullDb.getPokemonDb().size)
+                            //val res=pokemonDbHelper.showData
+                            //val buffer=StringBuffer()
+                            //while (res.moveToNext()){
+                                //buffer.append("ID: "+res.getString(0)+"\n")
+                            //}
+                            //println(buffer.toString())
+                            //println(res.count)
                             pageNum++
                         }
                     }
@@ -51,18 +64,10 @@ class MainActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 println("Parsing failed: $e")
             }
-            var totalCount=0
-            for (page in PokemonCardFullDb.getPokemonDb()){
-                totalCount += page.getPokemonCardPages().size
-            }
-            println("There are $totalCount cards in the complete database.")
+            val res=pokemonDbHelper.showData
+            //println("There are ${res.count} cards in the complete Pokemon Card database.")
 
-            //var name = "charizard"                            //all this code is to test filtering and adding functionalities to the user's collection
-            //var hp = "120"
-            //UserPokemonCardCollection.pokemonCollectionAdder(name, hp)
-            //for (x in UserPokemonCardCollection.getPokemonCollection()){
-                //println(x.toString())
-            //}
+
         }.start()
     }
 }
