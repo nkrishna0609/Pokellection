@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.gson.GsonBuilder
 import okhttp3.*
 import java.io.IOException
@@ -19,11 +21,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        jsonParsePokemon("https://api.pokemontcg.io/v1/cards?page=", "{\"cards\":[]}")
+        start()
     }
 
-    fun jsonParsePokemon(url: String, endBody: String){
-        Thread {
+    fun start(){
+            if (pokemonDbHelper.showData.count==0){         //this means that the full JSON db will populate for the first time after downloading the app
+                jsonParserPokemon("https://api.pokemontcg.io/v1/cards?page=", "{\"cards\":[]}")
+            }
+            if (pokemonDbHelper.showData.count!=0) {        //this means that the full JSON db will update once the user clicks the "update JSON db" button
+                val buttonUpdatePokeJSONdb = findViewById<Button>(R.id.buttonUpdatePokeJSONdb)
+                buttonUpdatePokeJSONdb.setOnClickListener{
+                    try{
+                            pokemonDbHelper.resetDb()
+                            jsonParserPokemon(
+                                "https://api.pokemontcg.io/v1/cards?page=",
+                                "{\"cards\":[]}"
+                            )
+                    }
+                    catch (e:Exception){
+                        e.printStackTrace()
+                        Toast.makeText(this, e.message.toString(), Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+    }
+
+    fun jsonParserPokemon(url: String, endBody: String){
+        Thread{
             var pageNum = 1
             var isEmpty=false
 
@@ -52,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                             //val res=pokemonDbHelper.showData
                             //val buffer=StringBuffer()
                             //while (res.moveToNext()){
-                                //buffer.append("ID: "+res.getString(0)+"\n")
+                            //buffer.append("ID: "+res.getString(0)+"\n")
                             //}
                             //println(buffer.toString())
                             //println(res.count)
@@ -64,10 +88,8 @@ class MainActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 println("Parsing failed: $e")
             }
-            val res=pokemonDbHelper.showData
-            //println("There are ${res.count} cards in the complete Pokemon Card database.")
 
-
+            //println("There are ${pokemonDbHelper.showData.count} cards in the complete Pokemon Card database.")
         }.start()
     }
 }
