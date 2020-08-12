@@ -1,23 +1,84 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder
 
-import com.google.gson.Gson
+//import com.google.gson.Gson
 
-class PokemonCard (private val id: String, private val name: String, private val nationalPokedexNumber: Int,private val imageUrlHiRes: String,private val types: ArrayList<String> ,private val supertype: String,private val subtype: String,private val evolvesFrom: String,private val hp: String,private val retreatCost: ArrayList<String> ,private val number: String, private val rarity: String,private val series: String,private val set: String,private val setCode: String,private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait,private val ability: PokemonCardAbility) {
+class PokemonCard (private val id: String, private val name: String, private val nationalPokedexNumber: Int,private val imageUrlHiRes: String,private val types: ArrayList<String> ,private val supertype: String,private val subtype: String,private val evolvesFrom: String,private val hp: String,private val convertedRetreatCost: Int ,private val number: String, private val rarity: String,private val series: String,private val set: String,private val setCode: String,private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait,private val ability: PokemonCardAbility) {
 
-    fun pokemonTypesSerialized(): String{
-        val gson = Gson()
-        val toStoreTypes: String = gson.toJson(types)
-        return toStoreTypes
+    //fun pokemonTypesSerialized(): String{
+        //val gson = Gson()
+        //val toStoreTypes: String = gson.toJson(types)
+        //return toStoreTypes
+    //}
+
+    fun pokemonWeaknessesToString(): String{
+        var output=""
+        var separator = ""
+
+        if (weaknesses!=null){
+            for (weakness in weaknesses){
+                output=output+separator + weakness.toString()
+                separator = ", "
+            }
+        }
+
+        return output
+    }
+    fun pokemonAncientTraitToString(): String {
+        return "\n\t\tName: ${ancientTrait.getPokemonAncientTraitName()}\n\t\tDescription: ${ancientTrait.getPokemonAncientTraitText()}"
     }
 
-    fun pokemonRetreatCostSerialized(): String{
-        val gson = Gson()
-        val toStoreTypes: String = gson.toJson(retreatCost)
-        return toStoreTypes
+    fun pokemonAbilityToString(): String {
+        return "\n\t\tName: ${ability.getPokemonAbilityName()}\n\t\tType: ${ability.getPokemonAbilityType()}\n\t\tDescription: ${ability.getPokemonAbilityText()}"
+
     }
 
-    fun getRetreatCost():ArrayList<String>{
-        return retreatCost
+    fun pokemonResistancesToString(): String{
+        var output=""
+        var separator = ""
+        if (resistances!=null){
+            for (resistance in resistances){
+                output=output+separator + resistance.toString()
+                separator = ", "
+            }
+        }
+        return output
+    }
+
+    fun pokemonTypesToString(): String{
+        var output=""
+        var separator = ""
+
+        if (types!=null){
+            for (type in types){
+                output=output+separator + type
+                separator = ", "
+            }
+        }
+
+        return output
+    }
+
+    fun pokemonAttacksToString(): String{
+        var output=""
+        var count=1
+
+        if (attacks!=null){
+            for (attack in attacks){
+                output = output + "\n\t\tAttack $count: \n${attack.toString()}"
+                count++
+            }
+        }
+        return output
+    }
+
+    //fun pokemonRetreatCostSerialized(): String{
+        //val gson = Gson()
+        //val toStoreTypes: String = gson.toJson(retreatCost)
+        //return toStoreTypes
+    //}
+
+    fun getRetreatCost():Int{
+        return convertedRetreatCost
     }
 
     fun getAbility(): PokemonCardAbility{

@@ -8,4 +8,5 @@ class PokemonCardAncientTrait(private val name: String, private val text: String
     fun getPokemonAncientTraitText():String{
         return text
     }
+
 }

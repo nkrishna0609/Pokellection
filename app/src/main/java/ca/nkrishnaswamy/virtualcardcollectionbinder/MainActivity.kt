@@ -15,7 +15,7 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    internal var pokemonDbHelper=CompletePokemonCardDatabaseOperations(this)
+    internal var pokemonDbHelper=UserPokemonCardDatabaseOperations(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,46 +25,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun start(){
-            if (pokemonDbHelper.showData.count==0){         //this means that the full JSON db will populate for the first time after downloading the app
-                jsonParserPokemon("https://api.pokemontcg.io/v1/cards?page=", "{\"cards\":[]}")
-            }
-            if (pokemonDbHelper.showData.count!=0) {        //this means that the full JSON db will update once the user clicks the "update JSON db" button
-                val buttonUpdatePokeJSONdb = findViewById<Button>(R.id.buttonUpdatePokeJSONdb)
-                buttonUpdatePokeJSONdb.setOnClickListener{
-                    try{
-                            pokemonDbHelper.resetDb()
-                            jsonParserPokemon(
-                                "https://api.pokemontcg.io/v1/cards?page=",
-                                "{\"cards\":[]}"
-                            )
-                    }
-                    catch (e:Exception){
-                        e.printStackTrace()
-                        Toast.makeText(this, e.message.toString(), Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
+        pokemonDbHelper.resetDb()
+        //addCardPokemon("charizard","120", "legendary collection","3", "pokemon","stage 2")
+        addCardPokemon("","", "holon phantoms","8", "","")
+        addCardPokemon("","","xy black star promos","xy60","","")
+
+        //deleteCardPokemon("charizard","120", "legendary power","3", "pokemon","stage 2")
     }
 
-    fun jsonParserPokemon(url: String, endBody: String){
+    fun addCardPokemon(name: String,hp: String,pokeCardSetName: String, pokeCardNumber: String,superType: String, subType: String){
         Thread{
-            var pageNum = 1
-            var isEmpty=false
+            var url = "https://api.pokemontcg.io/v1/cards?"
 
             val client = OkHttpClient()
             try {
-                while (!isEmpty) {
-                    val request = Request.Builder().url("$url$pageNum").build()
+                    val request = Request.Builder().url("${url}name=${name}&&hp=${hp}&&set=${pokeCardSetName}&&number=${pokeCardNumber}&&supertype=${superType}&&subtype=${subType}").build()
 
                     client.newBuilder().build()
                     client.newCall(request).execute().use { response ->
-                        val body = response.body?.string()
+                            val body = response.body?.string()
 
-                        if (body == endBody) {
-                            isEmpty=true
-                            //println("Page $pageNum is empty")
-                        }
-                        else {
                             val gson = GsonBuilder().create()
 
                             val pokemonPage = gson.fromJson(body, PokemonCardPage::class.java)
@@ -72,24 +52,35 @@ class MainActivity : AppCompatActivity() {
                                 pokemonDbHelper.insertCard(card)
                             }
 
-                            //println("Page Num: $pageNum")
-                            //val res=pokemonDbHelper.showData
-                            //val buffer=StringBuffer()
-                            //while (res.moveToNext()){
-                            //buffer.append("ID: "+res.getString(0)+"\n")
-                            //}
-                            //println(buffer.toString())
-                            //println(res.count)
-                            pageNum++
-                        }
+                            println("There are ${pokemonDbHelper.showData.count} cards in the complete Pokemon Card database.")
+                            val res=pokemonDbHelper.showData
+                            val buffer=StringBuffer()
+                            while (res.moveToNext()){
+                                buffer.append("ID: "+res.getString(0)+"\n")
+                                buffer.append("Name: "+res.getString(1)+"\n")
+                                buffer.append("HP: "+res.getString(9)+"\n")
+                                buffer.append("Type(s): "+res.getString(5)+"\n")
+                                buffer.append("Attack(s): "+res.getString(16)+"\n")
+                                buffer.append("Ability: "+res.getString(20)+"\n")
+                                buffer.append("Weakness(es): "+res.getString(17)+"\n")
+                                buffer.append("Resistance(s): "+res.getString(18)+"\n")
+                                buffer.append("Retreat Cost: "+res.getString(10)+"\n")
+                                buffer.append("Ancient Trait(s): "+res.getString(19)+"\n")
+                                buffer.append("Set Name: "+res.getString(14)+"\n")
+                                buffer.append("Set Number: "+res.getString(11)+"\n")
+                                buffer.append("Super Type: "+res.getString(6)+"\n")
+                                buffer.append("Sub Type: "+res.getString(7)+"\n")
+                            }
+                            println(buffer.toString())
+
                     }
-                }
+
 
             } catch (e: IOException) {
                 println("Parsing failed: $e")
             }
 
-            //println("There are ${pokemonDbHelper.showData.count} cards in the complete Pokemon Card database.")
+
         }.start()
     }
 }

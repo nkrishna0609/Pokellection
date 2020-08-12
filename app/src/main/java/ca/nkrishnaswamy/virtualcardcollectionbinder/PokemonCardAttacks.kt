@@ -5,6 +5,22 @@ class PokemonCardAttacks(private val cost: ArrayList<String>, private val name: 
         return cost
     }
 
+    override fun toString():String{
+        return "\t\t\tName: $name\n\t\t\tDescription: $text\n\t\t\tDamage: $damage\n\t\t\tCost: ${costToString()}"
+    }
+
+    fun costToString():String{
+        var output=""
+        var separator = ""
+
+        for (cost in cost){
+            output=output+separator + cost
+            separator = ", "
+        }
+
+        return output
+    }
+
     fun getPokemonAttackName():String{
         return name
     }
