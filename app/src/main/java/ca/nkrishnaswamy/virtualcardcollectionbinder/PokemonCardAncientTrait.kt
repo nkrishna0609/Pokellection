@@ -1,6 +1,6 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder
 
-class PokemonCardAncientTrait(private val name: String, private val text: String) {
+class PokemonCardAncientTrait(private val name: String,private val text: String) {
     fun getPokemonAncientTraitName():String{
         return name
     }

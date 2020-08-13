@@ -2,7 +2,7 @@ package ca.nkrishnaswamy.virtualcardcollectionbinder
 
 //import com.google.gson.Gson
 
-class PokemonCard (private val id: String, private val name: String, private val nationalPokedexNumber: Int,private val imageUrlHiRes: String,private val types: ArrayList<String> ,private val supertype: String,private val subtype: String,private val evolvesFrom: String,private val hp: String,private val convertedRetreatCost: Int ,private val number: String, private val rarity: String,private val series: String,private val set: String,private val setCode: String,private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait,private val ability: PokemonCardAbility) {
+class PokemonCard(private val id: String, private val name: String, private val nationalPokedexNumber: Int,private val imageUrlHiRes: String,private val types: ArrayList<String> ,private val supertype: String,private val subtype: String,private val evolvesFrom: String,private val hp: String,private val convertedRetreatCost: Int ,private val number: String, private val rarity: String,private val series: String,private val set: String,private val setCode: String,private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait,private val ability: PokemonCardAbility) {
 
     //fun pokemonTypesSerialized(): String{
         //val gson = Gson()
@@ -14,28 +14,43 @@ class PokemonCard (private val id: String, private val name: String, private val
         var output=""
         var separator = ""
 
-        if (weaknesses!=null){
+        if (weaknesses.isNullOrEmpty()){
+            output= "Not applicable to this card."
+        }
+        else{
             for (weakness in weaknesses){
                 output=output+separator + weakness.toString()
                 separator = ", "
             }
         }
-
         return output
     }
     fun pokemonAncientTraitToString(): String {
-        return "\n\t\tName: ${ancientTrait.getPokemonAncientTraitName()}\n\t\tDescription: ${ancientTrait.getPokemonAncientTraitText()}"
+        if (ancientTrait.getPokemonAncientTraitName().isNullOrEmpty()){
+            return "Not applicable to this card."
+        }
+        else{
+            return "\n\t\tName: ${ancientTrait.getPokemonAncientTraitName()}\n\t\tDescription: ${ancientTrait.getPokemonAncientTraitText()}"
+        }
     }
 
     fun pokemonAbilityToString(): String {
-        return "\n\t\tName: ${ability.getPokemonAbilityName()}\n\t\tType: ${ability.getPokemonAbilityType()}\n\t\tDescription: ${ability.getPokemonAbilityText()}"
+        if (ability.getPokemonAbilityName().isNullOrEmpty()){
+            return "Not applicable to this card."
+        }
+        else{
+            return "\n\t\tName: ${ability.getPokemonAbilityName()}\n\t\tType: ${ability.getPokemonAbilityType()}\n\t\tDescription: ${ability.getPokemonAbilityText()}"
 
+        }
     }
 
     fun pokemonResistancesToString(): String{
         var output=""
         var separator = ""
-        if (resistances!=null){
+        if (resistances.isNullOrEmpty()){
+            output= "Not applicable to this card."
+        }
+        else{
             for (resistance in resistances){
                 output=output+separator + resistance.toString()
                 separator = ", "
@@ -48,13 +63,15 @@ class PokemonCard (private val id: String, private val name: String, private val
         var output=""
         var separator = ""
 
-        if (types!=null){
+        if (types.isNullOrEmpty()){
+            output= "Not applicable to this card."
+        }
+        else{
             for (type in types){
                 output=output+separator + type
                 separator = ", "
             }
         }
-
         return output
     }
 
@@ -62,9 +79,12 @@ class PokemonCard (private val id: String, private val name: String, private val
         var output=""
         var count=1
 
-        if (attacks!=null){
+        if (attacks.isNullOrEmpty()){
+            output="Not applicable to this card."
+        }
+        else{
             for (attack in attacks){
-                output = output + "\n\t\tAttack $count: \n${attack.toString()}"
+                output += "\n\t\tAttack $count: \n${attack.toString()}"
                 count++
             }
         }
@@ -77,8 +97,13 @@ class PokemonCard (private val id: String, private val name: String, private val
         //return toStoreTypes
     //}
 
-    fun getRetreatCost():Int{
-        return convertedRetreatCost
+    fun getRetreatCost():String{
+        if (convertedRetreatCost==-1){
+            return "Not applicable to this card."
+        }
+        else{
+            return convertedRetreatCost.toString()
+        }
     }
 
     fun getAbility(): PokemonCardAbility{
@@ -112,8 +137,13 @@ class PokemonCard (private val id: String, private val name: String, private val
         return name
     }
 
-    fun getPokedexNum():Int{
-        return nationalPokedexNumber
+    fun getPokedexNum():String{
+        if (nationalPokedexNumber==-1){
+            return "Not applicable to this card."
+        }
+        else{
+            return nationalPokedexNumber.toString()
+        }
     }
 
     fun getImage():String{
@@ -129,11 +159,21 @@ class PokemonCard (private val id: String, private val name: String, private val
     }
 
     fun getEvolvesFrom():String{
-        return evolvesFrom
+        if (evolvesFrom.isNullOrEmpty()){
+            return "Not applicable to this card."
+        }
+        else{
+            return evolvesFrom
+        }
     }
 
     fun gethp():String{
-        return hp
+        if (hp.isNullOrEmpty()){
+            return "Not applicable to this card."
+        }
+        else{
+            return hp
+        }
     }
 
     fun getSetNum():String{

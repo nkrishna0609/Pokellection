@@ -37,8 +37,8 @@ class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(cont
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE $TABLE_NAME(ID INTEGER PRIMARY KEY "+"AUTOINCREMENT,NAME TEXT," +
-                "POKEMONID TEXT,NATIONALPOKEDEXNUMBER INTEGER,IMAGEURLHIRES TEXT,TYPES TEXT,SUPERTYPE TEXT," +
-                "SUBTYPE TEXT,EVOLVESFROM TEXT,HP TEXT,RETREATCOST INTEGER," +
+                "POKEMONID TEXT,NATIONALPOKEDEXNUMBER TEXT,IMAGEURLHIRES TEXT,TYPES TEXT,SUPERTYPE TEXT," +
+                "SUBTYPE TEXT,EVOLVESFROM TEXT,HP TEXT,RETREATCOST TEXT," +
                 "NUMBER TEXT,RARITY TEXT,SERIES TEXT,SETNAME TEXT,SETCODE TEXT,ATTACKS TEXT,WEAKNESSES TEXT,RESISTANCES TEXT,ANCIENTTRAIT TEXT,ABILITY TEXT) ")
     }
 
@@ -87,6 +87,32 @@ class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(cont
         val db = this.writableDatabase
         db.delete(TABLE_NAME, null, null)
         db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME+"'")
+    }
+
+    fun dataToString():String{
+        println("There is/are ${showData.count} card(s) in the complete Pokemon Card database.")
+        val res=showData
+        val buffer=StringBuffer()
+        while (res.moveToNext()){
+            buffer.append("ID: "+res.getString(0)+"\n")
+            /*
+            buffer.append("Name: "+res.getString(1)+"\n")
+            buffer.append("Rarity: "+res.getString(12)+"\n")
+            buffer.append("HP: "+res.getString(9)+"\n")
+            buffer.append("Type(s): "+res.getString(5)+"\n")
+            buffer.append("Attack(s): "+res.getString(16)+"\n")
+            buffer.append("Ability: "+res.getString(20)+"\n")
+            buffer.append("Weakness(es): "+res.getString(17)+"\n")
+            buffer.append("Resistance(s): "+res.getString(18)+"\n")
+            buffer.append("Retreat Cost: "+res.getString(10)+"\n")
+            buffer.append("Ancient Trait: "+res.getString(19)+"\n")
+            buffer.append("Set Name: "+res.getString(14)+"\n")
+            buffer.append("Set Number: "+res.getString(11)+"\n")
+            buffer.append("Super Type: "+res.getString(6)+"\n")
+            buffer.append("Sub Type: "+res.getString(7)+"\n")
+*/
+        }
+        return buffer.toString()
     }
 
 }
