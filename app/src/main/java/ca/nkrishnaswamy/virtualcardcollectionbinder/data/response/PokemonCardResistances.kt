@@ -1,6 +1,6 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
 
-class PokemonCardResistances(private val type: String, private val value: String) {
+data class PokemonCardResistances(private val type: String, private val value: String) {
     fun getResistanceType():String{
         return type
     }

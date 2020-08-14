@@ -1,6 +1,6 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
 
-class PokemonCardWeaknesses (private val type: String, private val value: String) {
+data class PokemonCardWeaknesses (private val type: String, private val value: String) {
     fun getWeaknessType():String{
         return type
     }

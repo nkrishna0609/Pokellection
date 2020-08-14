@@ -1,12 +1,16 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import ca.nkrishnaswamy.virtualcardcollectionbinder.data.response.PokemonCard
 
-class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(context,
+    DATABASE_NAME, null,
+    DATABASE_VERSION
+) {
 
     companion object{
         const val DATABASE_NAME = "UserPokemonCard.db"
@@ -86,7 +90,7 @@ class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(cont
     fun resetDb(){
         val db = this.writableDatabase
         db.delete(TABLE_NAME, null, null)
-        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME+"'")
+        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME +"'")
     }
 
     fun dataToString():String{
@@ -95,7 +99,6 @@ class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(cont
         val buffer=StringBuffer()
         while (res.moveToNext()){
             buffer.append("ID: "+res.getString(0)+"\n")
-            /*
             buffer.append("Name: "+res.getString(1)+"\n")
             buffer.append("Rarity: "+res.getString(12)+"\n")
             buffer.append("HP: "+res.getString(9)+"\n")
@@ -110,7 +113,6 @@ class UserPokemonCardDatabaseOperations(context: Context): SQLiteOpenHelper(cont
             buffer.append("Set Number: "+res.getString(11)+"\n")
             buffer.append("Super Type: "+res.getString(6)+"\n")
             buffer.append("Sub Type: "+res.getString(7)+"\n")
-*/
         }
         return buffer.toString()
     }

@@ -1,14 +1,7 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
 
-//import com.google.gson.Gson
-
-class PokemonCard(private val id: String, private val name: String, private val nationalPokedexNumber: Int,private val imageUrlHiRes: String,private val types: ArrayList<String> ,private val supertype: String,private val subtype: String,private val evolvesFrom: String,private val hp: String,private val convertedRetreatCost: Int ,private val number: String, private val rarity: String,private val series: String,private val set: String,private val setCode: String,private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait,private val ability: PokemonCardAbility) {
-
-    //fun pokemonTypesSerialized(): String{
-        //val gson = Gson()
-        //val toStoreTypes: String = gson.toJson(types)
-        //return toStoreTypes
-    //}
+data class PokemonCard(private val id: String, private val name: String, private val nationalPokedexNumber: Int, private val imageUrlHiRes: String, private val types: ArrayList<String>, private val supertype: String, private val subtype: String, private val evolvesFrom: String, private val hp: String, private val convertedRetreatCost: Int, private val number: String, private val rarity: String, private val series: String, private val set: String, private val setCode: String, private val attacks: ArrayList<PokemonCardAttacks>, private val weaknesses: ArrayList<PokemonCardWeaknesses>, private val resistances: ArrayList<PokemonCardResistances>, private val ancientTrait: PokemonCardAncientTrait, private val ability: PokemonCardAbility
+) {
 
     fun pokemonWeaknessesToString(): String{
         var output=""
@@ -91,12 +84,6 @@ class PokemonCard(private val id: String, private val name: String, private val 
         return output
     }
 
-    //fun pokemonRetreatCostSerialized(): String{
-        //val gson = Gson()
-        //val toStoreTypes: String = gson.toJson(retreatCost)
-        //return toStoreTypes
-    //}
-
     fun getRetreatCost():String{
         if (convertedRetreatCost==-1){
             return "Not applicable to this card."
@@ -106,11 +93,11 @@ class PokemonCard(private val id: String, private val name: String, private val 
         }
     }
 
-    fun getAbility(): PokemonCardAbility{
+    fun getAbility(): PokemonCardAbility {
         return ability
     }
 
-    fun getAncientTrait(): PokemonCardAncientTrait{
+    fun getAncientTrait(): PokemonCardAncientTrait {
         return ancientTrait
     }
     fun getPokemonTypes():ArrayList<String>{

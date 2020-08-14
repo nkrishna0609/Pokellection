@@ -1,6 +1,6 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
 
-class PokemonCardAbility (private val name: String, private val text: String,private val type: String){
+data class PokemonCardAbility (private val name: String, private val text: String,private val type: String){
 
     fun getPokemonAbilityName():String{
             return name

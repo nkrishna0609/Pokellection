@@ -1,6 +1,6 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
 
-class PokemonCardAttacks(private val cost: ArrayList<String>, private val name: String, private val text: String, private val damage: String, private val convertedEnergyCost: Int) {
+data class PokemonCardAttacks(private val cost: ArrayList<String>, private val name: String, private val text: String, private val damage: String, private val convertedEnergyCost: Int) {
     fun getAttackCosts():ArrayList<String>{
         return cost
     }
