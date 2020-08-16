@@ -1,6 +1,7 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.data
+package ca.nkrishnaswamy.virtualcardcollectionbinder.network
 
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.response.*
+import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.*
+import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
 import com.google.gson.*
 import java.lang.reflect.Type
 
@@ -11,20 +12,13 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
 
         var jsonArrayCard: JsonArray? = jsonCard?.get("cards")?.asJsonArray
 
-        var i = 0
-
         if (jsonArrayCard != null) {
             for (i in 0..(jsonArrayCard.size() - 1)) {
                 var jsonCardDetails: JsonObject? = jsonArrayCard.get(i).asJsonObject
                 val name = jsonCardDetails?.get("name")?.asString
-                val pokeId = jsonCardDetails?.get("id")?.asString
-                var pokedexNum = -1                                                   //not applicable to every card
-                if (jsonCardDetails?.has("nationalPokedexNumber")!!) {
-                    pokedexNum = jsonCardDetails.get("nationalPokedexNumber").asInt
-                }
-                val image = jsonCardDetails.get("imageUrlHiRes").asString
+                val image = jsonCardDetails?.get("imageUrlHiRes")?.asString
                 var typesList = arrayListOf<String>()                               //not applicable to every card
-                if (jsonCardDetails.has("types")) {
+                if (jsonCardDetails!!.has("types")) {
                     val typesDetails = jsonCardDetails.get("types").asJsonArray
                     typesList = ArrayList<String>()
                     for (x in 0..(typesDetails.size() - 1)) {
@@ -40,10 +34,6 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 var hp = ""                                                           //not applicable to every card
                 if (jsonCardDetails.has("hp")) {
                     hp = jsonCardDetails.get("hp").asString
-                }
-                var retreatCost = -1                                                  //not applicable to every card
-                if (jsonCardDetails.has("convertedRetreatCost")) {
-                    retreatCost = jsonCardDetails.get("convertedRetreatCost").asInt
                 }
                 val setNum = jsonCardDetails.get("number").asString
                 val rarity = jsonCardDetails.get("rarity").asString
@@ -66,7 +56,13 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                             listCost.add(energyCost.get(x).asString)
                         }
                         val thisAttack =
-                            PokemonCardAttacks(listCost, name!!, text!!, damage!!, intEnergyCost!!)
+                            PokemonCardAttacks(
+                                listCost,
+                                name!!,
+                                text!!,
+                                damage!!,
+                                intEnergyCost!!
+                            )
                         attacksList.add(thisAttack)
                     }
                 }
@@ -78,7 +74,11 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                         val jsonWeaknessDetails: JsonObject? = weaknesses.get(w).asJsonObject
                         val type = jsonWeaknessDetails?.get("type")?.asString
                         val value = jsonWeaknessDetails?.get("value")?.asString
-                        val thisWeakness = PokemonCardWeaknesses(type!!, value!!)
+                        val thisWeakness =
+                            PokemonCardWeaknesses(
+                                type!!,
+                                value!!
+                            )
                         weaknessesList.add(thisWeakness)
                     }
                 }
@@ -90,7 +90,11 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                         val jsonResistanceDetails: JsonObject? = resistances.get(r).asJsonObject
                         val type = jsonResistanceDetails?.get("type")?.asString
                         val value = jsonResistanceDetails?.get("value")?.asString
-                        val thisResistance = PokemonCardResistances(type!!, value!!)
+                        val thisResistance =
+                            PokemonCardResistances(
+                                type!!,
+                                value!!
+                            )
                         resistancesList.add(thisResistance)
                     }
                 }
@@ -103,7 +107,10 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
 
                 }
                 var ancienttrait =
-                    PokemonCardAncientTrait(ancientTraitName, ancientTraitText)
+                    PokemonCardAncientTrait(
+                        ancientTraitName,
+                        ancientTraitText
+                    )
 
                 var abilityName = ""
                 var abilityText = ""
@@ -113,18 +120,43 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                     abilityName = abilityDetails.get("name").asString
                     abilityText = abilityDetails.get("text").asString
                     abilityType = abilityDetails.get("type").asString
-
-                    var ability = PokemonCardAbility(abilityName, abilityText, abilityType)
                 }
-                var ability = PokemonCardAbility(abilityName, abilityText, abilityType)
+                var ability =
+                    PokemonCardAbility(
+                        abilityName,
+                        abilityText,
+                        abilityType
+                    )
 
-                val newCard = PokemonCard(pokeId!!, name!!, pokedexNum, image, typesList, supertype, subtype, evolvesFrom, hp, retreatCost, setNum, rarity, series, setName, setCode, attacksList, weaknessesList, resistancesList, ancienttrait, ability)
+                val newCard =
+                    PokemonCard(
+                        name!!,
+                        image!!,
+                        typesList,
+                        supertype,
+                        subtype,
+                        evolvesFrom,
+                        hp,
+                        setNum,
+                        rarity,
+                        series,
+                        setName,
+                        setCode,
+                        attacksList,
+                        weaknessesList,
+                        resistancesList,
+                        ancienttrait,
+                        ability
+                    )
 
                 cardList.add(newCard)
             }
         }
 
-        val pokePage = PokemonCardPageResponse(cardList)
+        val pokePage =
+            PokemonCardPageResponse(
+                cardList
+            )
 
         return pokePage
     }

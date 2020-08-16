@@ -1,6 +1,9 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.data.response
+package ca.nkrishnaswamy.virtualcardcollectionbinder.data.models
 
-data class PokemonCardWeaknesses (private val type: String, private val value: String) {
+data class PokemonCardWeaknesses (
+    protected val type: String,
+    protected val value: String) {
+
     fun getWeaknessType():String{
         return type
     }
@@ -8,8 +11,10 @@ data class PokemonCardWeaknesses (private val type: String, private val value: S
     fun getPokemonWeaknessAmount():String{
         return value
     }
-
+/*
     override fun toString(): String {
         return "$type - $value"
     }
+
+     */
 }

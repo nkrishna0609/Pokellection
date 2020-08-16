@@ -1,6 +1,6 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.data
+package ca.nkrishnaswamy.virtualcardcollectionbinder.network
 
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.response.PokemonCardPageResponse
+import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -32,13 +32,11 @@ interface ApiService {
                 val request = chain.request().newBuilder().url(url).build()
                 return@Interceptor chain.proceed(request)
             }
-            lateinit var cardsPageResponse: PokemonCardPageResponse
+            //lateinit var cardsPageResponse: PokemonCardPageResponse
             val okHttpClient = OkHttpClient.Builder().addInterceptor(reqInterceptor).build()
             val pokeCardPageDeserializer = GsonBuilder().registerTypeAdapter(PokemonCardPageResponse::class.java, GetPokemonCardPageDeserializer()).create()
 
-            val apiService =  Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addCallAdapterFactory(CoroutineCallAdapterFactory()).addConverterFactory(GsonConverterFactory.create(pokeCardPageDeserializer)).build().create(ApiService::class.java)
-
-            return apiService
+            return Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addCallAdapterFactory(CoroutineCallAdapterFactory()).addConverterFactory(GsonConverterFactory.create(pokeCardPageDeserializer)).build().create(ApiService::class.java)
         }
     }
 }
