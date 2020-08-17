@@ -8,13 +8,13 @@ import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 interface UserCardsDAO {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertCards(cardList: ArrayList<PokemonCard>)
+    suspend fun insertCard(card: PokemonCard)
 
     @Query("SELECT * FROM pokemonCardsTable WHERE card_name LIKE :search " + "OR card_evolvesFrom LIKE :search " + "OR card_seriesName LIKE :search " + "OR card_setName LIKE :search")
-    suspend fun searchCards(search: String) : List<PokemonCard>
+    fun searchCards(search: String) : LiveData<List<PokemonCard>>
 
     @Query("SELECT * FROM pokemonCardsTable")
-    suspend fun getAllCards() : LiveData<List<PokemonCard>>
+    fun getAllCards() : LiveData<List<PokemonCard>>
 
     @Delete
     suspend fun deleteCard(card: PokemonCard)
