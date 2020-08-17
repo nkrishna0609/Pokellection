@@ -2,11 +2,7 @@ package ca.nkrishnaswamy.virtualcardcollectionbinder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.UserCardsDAO
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.UserPokeCardRoomDb
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.ApiService
-import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
