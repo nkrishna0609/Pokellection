@@ -31,4 +31,8 @@ class UserCardsViewModel(application: Application) : AndroidViewModel(applicatio
     fun searchCardsFromDb(search: String): LiveData<List<PokemonCard>>{
         return repository.searchCards(search)
     }
+
+    suspend fun retrieveCardsFromApi(cardName: String, hp: String, setName: String, pokeCardNumber: String, superType: String, subType: String): List<PokemonCard>{
+        return repository.getUserCardsFromApi(cardName, hp, setName, pokeCardNumber, superType, subType)
+    }
 }

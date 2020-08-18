@@ -2,7 +2,6 @@ package ca.nkrishnaswamy.virtualcardcollectionbinder.repositories
 
 import androidx.lifecycle.LiveData
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.DAOs.UserCardsDAO
-import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.roomDbs.UserPokeCardRoomDb
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.ApiService
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
@@ -11,20 +10,16 @@ import kotlinx.coroutines.withContext
 
 class CardsRepository(private val cardDao: UserCardsDAO) {
 
-    suspend fun getUserCardsFromApi(cardName: String,hp: String,setName: String, pokeCardNumber: String,superType: String, subType: String) {
-        withContext(Dispatchers.IO) {
+    suspend fun getUserCardsFromApi(cardName: String,hp:String,setName: String, pokeCardNumber: String,superType: String, subType: String) = withContext(Dispatchers.IO){
             val apiService = ApiService()
-            val pokeCardPage: PokemonCardPageResponse = apiService.getCardPage(
+            apiService.getCardPage(
                 cardName,
                 hp,
                 setName,
                 pokeCardNumber,
                 superType,
                 subType
-            ).await()
-            val pokeCardsList: List<PokemonCard> = pokeCardPage.getPokemonCards()
-            return@withContext pokeCardsList
-        }
+            ).await().getPokemonCards()
     }
 
     fun getAllCardsInDb(): LiveData<List<PokemonCard>> {
