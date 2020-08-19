@@ -1,6 +1,6 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder.network
 
-import androidx.lifecycle.LiveData
+import android.content.Context
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -26,15 +26,16 @@ interface ApiService {
     ): Deferred<PokemonCardPageResponse>
 
     companion object {
-        operator fun invoke(): ApiService {
+        operator fun invoke(context: Context): ApiService {
             val reqInterceptor = Interceptor {chain ->
 
                 val url = chain.request().url.newBuilder().addQueryParameter("cards","?").build()
                 val request = chain.request().newBuilder().url(url).build()
                 return@Interceptor chain.proceed(request)
             }
-            //lateinit var cardsPageResponse: PokemonCardPageResponse
-            val okHttpClient = OkHttpClient.Builder().addInterceptor(reqInterceptor).build()
+            val okHttpClient = OkHttpClient.Builder().addInterceptor(reqInterceptor).addInterceptor(
+                ConnectivityInterceptor(context)
+            ).build()
             val pokeCardPageDeserializer = GsonBuilder().registerTypeAdapter(PokemonCardPageResponse::class.java, GetPokemonCardPageDeserializer()).create()
 
             return Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addCallAdapterFactory(CoroutineCallAdapterFactory()).addConverterFactory(GsonConverterFactory.create(pokeCardPageDeserializer)).build().create(ApiService::class.java)

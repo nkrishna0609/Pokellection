@@ -1,25 +1,19 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder.repositories
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.DAOs.UserCardsDAO
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.ApiService
-import ca.nkrishnaswamy.virtualcardcollectionbinder.network.response.PokemonCardPageResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CardsRepository(private val cardDao: UserCardsDAO) {
 
-    suspend fun getUserCardsFromApi(cardName: String,hp:String,setName: String, pokeCardNumber: String,superType: String, subType: String) = withContext(Dispatchers.IO){
-            val apiService = ApiService()
-            apiService.getCardPage(
-                cardName,
-                hp,
-                setName,
-                pokeCardNumber,
-                superType,
-                subType
-            ).await().getPokemonCards()
+    suspend fun getUserCardsFromApi(context: Context, cardName: String,hp:String,setName: String, pokeCardNumber: String,superType: String, subType: String) = withContext(Dispatchers.IO){
+        val apiService = ApiService(context = context)
+        apiService.getCardPage(cardName, hp, setName, pokeCardNumber, superType, subType).await().getPokemonCards()
     }
 
     fun getAllCardsInDb(): LiveData<List<PokemonCard>> {

@@ -1,12 +1,18 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder
+package ca.nkrishnaswamy.virtualcardcollectionbinder.UI
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ca.nkrishnaswamy.virtualcardcollectionbinder.network.ApiService
+import android.util.Log
+import androidx.lifecycle.ViewModelProvider
+import ca.nkrishnaswamy.virtualcardcollectionbinder.R
+import ca.nkrishnaswamy.virtualcardcollectionbinder.network.NoConnectionException
+import ca.nkrishnaswamy.virtualcardcollectionbinder.viewModels.UserCardsViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: UserCardsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private suspend fun start(){
         //pokemonDbHelper.resetDb()
         //addCardPokemon("super rod","", "","", "","")
-        //addCardPokemon("", "", "holon phantoms", "8", "", "")
+        addCardPokemon("", "", "holon phantoms", "8", "", "")
         //addCardPokemon("joltik", "", "black and white", "45", "", "")
 
     }
@@ -34,7 +40,23 @@ class MainActivity : AppCompatActivity() {
     private suspend fun addCardPokemon(name: String,hp: String,pokeCardSetName: String, pokeCardNumber: String,superType: String, subType: String){
         var cardName: String = ampersandRemover(name)
         var setName: String = ampersandRemover(pokeCardSetName)
-        val apiService= ApiService()
-        val pokeCardPage = apiService.getCardPage(cardName, hp, setName, pokeCardNumber, superType, subType).await()
+
+        viewModel = ViewModelProvider(this).get(UserCardsViewModel::class.java)
+        try {
+            val cardsList = viewModel.retrieveCardsFromApi(
+                cardName,
+                hp,
+                setName,
+                pokeCardNumber,
+                superType,
+                subType
+            )
+
+            for (x in cardsList) {
+                println(x.toString())
+            }
+        } catch (e: NoConnectionException) {
+            Log.e("Internet Status","No Internet Connection.")
+        }
     }
 }
