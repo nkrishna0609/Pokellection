@@ -11,5 +11,6 @@
     <string name = "errorEmptyStrings">Error! Enter card name, set name, and set number.</string>
     <string name = "errorCardNotFound">Error! Card not found.</string>
     <string name = "errorNoInternet">Error! Device not connected to the Internet.</string>
+    <string name = "deleteAllCards">Removed all cards from collection.</string>
 
 </resources>

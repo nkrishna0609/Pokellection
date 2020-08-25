@@ -30,4 +30,9 @@ class CardsRepository(private val cardDao: UserCardsDAO) {
     suspend fun insertCard(card: PokemonCard){
         cardDao.insertCard(card)
     }
+
+    suspend fun deleteAllCards(){
+        cardDao.deleteAll()
+    }
+
 }

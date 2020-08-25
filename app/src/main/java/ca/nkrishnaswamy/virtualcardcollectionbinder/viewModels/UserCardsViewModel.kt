@@ -39,4 +39,9 @@ class UserCardsViewModel(application: Application) : AndroidViewModel(applicatio
         val cardsList =  repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber)
         return cardsList
     }
+
+    suspend fun deleteAllCards(){
+        repository.deleteAllCards()
+    }
+
 }

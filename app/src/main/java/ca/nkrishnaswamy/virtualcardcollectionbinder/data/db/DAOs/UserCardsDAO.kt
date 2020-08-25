@@ -19,4 +19,6 @@ interface UserCardsDAO {
     @Delete
     suspend fun deleteCard(card: PokemonCard)
 
+    @Query("DELETE FROM pokemonCardsTable")
+    suspend fun deleteAll()
 }
