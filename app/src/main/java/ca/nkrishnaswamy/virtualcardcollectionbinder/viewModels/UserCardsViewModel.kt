@@ -35,8 +35,8 @@ class UserCardsViewModel(application: Application) : AndroidViewModel(applicatio
         return repository.searchCards(search)
     }
 
-    suspend fun retrieveCardsFromApi(cardName: String, hp: String, setName: String, pokeCardNumber: String, superType: String, subType: String): List<PokemonCard>{
-        val cardsList =  repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber, superType, subType)
+    suspend fun retrieveCardsFromApi(cardName: String, hp: String, setName: String, pokeCardNumber: String): List<PokemonCard>{
+        val cardsList =  repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber)
         return cardsList
     }
 }

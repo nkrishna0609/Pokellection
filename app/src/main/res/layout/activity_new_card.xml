@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.NewCardActivity">
+
+    <LinearLayout
+        android:id="@+id/cardNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentTop="true"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/cardNameLabel"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:paddingStart="20dp" />
+
+        <EditText
+            android:id="@+id/enterCardName"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:hint="@string/cardNameEditBox"
+            android:textColor="@color/colorBlack"
+            android:singleLine="true"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorEditTextBG"
+            android:imeOptions="actionNext"
+            android:autofillHints="no"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/cardSetNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/cardNameLayout"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/cardSetNameLabel"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:paddingStart="20dp" />
+
+        <EditText
+            android:id="@+id/enterCardSetName"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:hint="@string/cardSetNameEditBox"
+            android:textColor="@color/colorBlack"
+            android:singleLine="true"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorEditTextBG"
+            android:imeOptions="actionNext"
+            android:autofillHints="no"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cardSetNumLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/cardSetNameLayout"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/cardSetNumLabel"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:paddingStart="20dp" />
+
+        <EditText
+            android:id="@+id/enterCardSetNum"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:hint="@string/cardSetNumEditBox"
+            android:textColor="@color/colorBlack"
+            android:singleLine="true"
+            android:paddingEnd="20dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:background="@color/colorEditTextBG"
+            android:imeOptions="actionNext"
+            android:autofillHints="no"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorRed"
+            android:text="@string/buttonCancel"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAllCaps="true"
+            />
+
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorRed"
+            android:text="@string/buttonCardSearch"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAllCaps="true"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

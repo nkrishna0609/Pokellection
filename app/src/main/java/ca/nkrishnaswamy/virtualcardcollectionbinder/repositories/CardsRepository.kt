@@ -11,9 +11,9 @@ import kotlinx.coroutines.withContext
 
 class CardsRepository(private val cardDao: UserCardsDAO) {
 
-    suspend fun getUserCardsFromApi(context: Context, cardName: String,hp:String,setName: String, pokeCardNumber: String,superType: String, subType: String) = withContext(Dispatchers.IO){
+    suspend fun getUserCardsFromApi(context: Context, cardName: String,hp:String,setName: String, pokeCardNumber: String) = withContext(Dispatchers.IO){
         val apiService = ApiService(context = context)
-        apiService.getCardPage(cardName, hp, setName, pokeCardNumber, superType, subType).await().getPokemonCards()
+        apiService.getCardPage(cardName, hp, setName, pokeCardNumber).await().getPokemonCards()
     }
 
     fun getAllCardsInDb(): LiveData<List<PokemonCard>> {

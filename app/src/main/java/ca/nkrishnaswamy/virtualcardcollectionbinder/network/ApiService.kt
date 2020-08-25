@@ -20,9 +20,7 @@ interface ApiService {
         @Query("name") cardName: String,
         @Query("hp") hp: String,
         @Query("set") setName: String,
-        @Query("number") setNum: String,
-        @Query("supertype") superType: String,
-        @Query("subtype") subType: String
+        @Query("number") setNum: String
     ): Deferred<PokemonCardPageResponse>
 
     companion object {
