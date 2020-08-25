@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(
                             applicationContext,
-                            R.string.deleteAllCards,
+                            R.string.deleteAllCardsNotification,
                             Toast.LENGTH_LONG
                         ).show()
                     }

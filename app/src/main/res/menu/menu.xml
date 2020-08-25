@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/deleteAllCards"
-        android:title="@string/deleteAllCards"
+        android:title="@string/deleteAllCardsLabel"
         app:showAsAction="never" />
 
 </menu>
