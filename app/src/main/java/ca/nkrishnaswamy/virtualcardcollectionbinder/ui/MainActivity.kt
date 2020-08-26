@@ -59,14 +59,14 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId){
             R.id.deleteAllCards ->
                 CoroutineScope(IO).launch {
-                    viewModel.deleteAllCards()
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            applicationContext,
-                            R.string.deleteAllCardsNotification,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                        viewModel.deleteAllCards()
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(
+                                applicationContext,
+                                R.string.deleteAllCardsNotification,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                 }
 
         }

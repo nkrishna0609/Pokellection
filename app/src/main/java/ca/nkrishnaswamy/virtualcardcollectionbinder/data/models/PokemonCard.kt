@@ -3,7 +3,7 @@ package ca.nkrishnaswamy.virtualcardcollectionbinder.data.models
 import androidx.room.*
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.typeConverters.*
 
-@Entity(tableName = "pokemonCardsTable")
+@Entity(tableName = "pokemonCardsTable", indices = [Index(value=["card_setName","card_num"],unique = true)])
 data class PokemonCard(
     @ColumnInfo(name="card_name")
     private var name: String,

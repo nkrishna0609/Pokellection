@@ -9,7 +9,7 @@ import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.DAOs.UserCardsDAO
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.typeConverters.*
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 
-@Database(entities=arrayOf(PokemonCard::class), version=1)
+@Database(entities=arrayOf(PokemonCard::class), version=2)
 @TypeConverters(StringArrayListTypeConverters::class, PokemonAttacksArrayListTypeConverters::class, PokemonResistancesArrayListTypeConverters::class, PokemonWeaknessesArrayListTypeConverters::class,
     PokemonAbilityTypeConverter::class,PokemonAncientTraitTypeConverter::class)
 abstract class UserPokeCardRoomDb : RoomDatabase(){
@@ -26,7 +26,9 @@ abstract class UserPokeCardRoomDb : RoomDatabase(){
                     INSTANCE
 
                 if (instance == null){
-                    instance= Room.databaseBuilder(context.applicationContext, UserPokeCardRoomDb::class.java, "userCardsDb").build()
+                    instance= Room.databaseBuilder(context.applicationContext, UserPokeCardRoomDb::class.java, "userCardsDb").addMigrations(
+                        MIGRATION_1_2
+                    ).build()
                     INSTANCE = instance
                 }
                 return instance
