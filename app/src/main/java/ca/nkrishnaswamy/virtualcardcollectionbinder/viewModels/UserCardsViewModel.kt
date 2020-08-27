@@ -1,7 +1,6 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder.viewModels
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class UserCardsViewModel(application: Application) : AndroidViewModel(application) {
 
-    val cardsDao = UserPokeCardRoomDb.getInstance(application).localPokeCardDao()
+    private val cardsDao = UserPokeCardRoomDb.getInstance(application).localPokeCardDao()
     private val repository = CardsRepository(cardsDao)
     private val allUserCards = repository.getAllCardsInDb()
 
@@ -32,8 +31,7 @@ class UserCardsViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     suspend fun retrieveCardsFromApi(cardName: String, hp: String, setName: String, pokeCardNumber: String): List<PokemonCard>{
-        val cardsList =  repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber)
-        return cardsList
+        return repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber)
     }
 
     suspend fun deleteAllCards(){

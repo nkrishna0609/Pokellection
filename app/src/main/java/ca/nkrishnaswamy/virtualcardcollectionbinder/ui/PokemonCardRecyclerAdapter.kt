@@ -21,7 +21,7 @@ class PokemonCardRecyclerAdapter internal constructor(context: Context): Recycle
     private var pokeCards= mutableListOf<PokemonCard>()
     private var pokeCardsFull =  emptyList<PokemonCard>()
 
-    inner class PokeCardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class PokeCardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val cardImageView: ImageView = itemView.findViewById(R.id.cardImage)
     }
 
@@ -47,6 +47,10 @@ class PokemonCardRecyclerAdapter internal constructor(context: Context): Recycle
         notifyDataSetChanged()
     }
 
+    fun getPokeCardAt(position: Int): PokemonCard{
+        return pokeCards.get(position)
+    }
+
     override fun getFilter(): Filter {
         return pokeCardFilter
     }
@@ -59,7 +63,7 @@ class PokemonCardRecyclerAdapter internal constructor(context: Context): Recycle
                 filteredList.addAll(pokeCardsFull)
             }
             else{
-                var filterString: String = p0.toString().toLowerCase(Locale.ROOT).trim()
+                val filterString: String = p0.toString().toLowerCase(Locale.ROOT).trim()
 
                 for (item in pokeCardsFull){
                     if ((item.getName().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getEvolvesFrom().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getSubtype().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getSupertype().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getHp().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getRarity().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getSeries().toLowerCase(Locale.ROOT).contains(filterString)) || (item.getSet().toLowerCase(Locale.ROOT).contains(filterString))){
@@ -67,7 +71,7 @@ class PokemonCardRecyclerAdapter internal constructor(context: Context): Recycle
                     }
                 }
             }
-            val results : FilterResults = FilterResults()
+            val results = FilterResults()
             results.values = filteredList
 
             return results
