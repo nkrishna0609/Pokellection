@@ -172,7 +172,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:background="@color/colorRed"
-            android:text="@string/buttonCardSearch"
+            android:text="@string/buttonCardAdd"
             android:textSize="20sp"
             android:gravity="center"
             android:paddingTop="10dp"
