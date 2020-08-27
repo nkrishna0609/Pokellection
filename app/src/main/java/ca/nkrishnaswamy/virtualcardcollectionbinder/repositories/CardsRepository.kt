@@ -24,9 +24,6 @@ class CardsRepository(private val cardDao: UserCardsDAO) {
         cardDao.deleteCard(card)
     }
 
-    fun searchCards(search: String): LiveData<List<PokemonCard>>{
-        return cardDao.searchCards(search)
-    }
     suspend fun insertCard(card: PokemonCard){
         cardDao.insertCard(card)
     }

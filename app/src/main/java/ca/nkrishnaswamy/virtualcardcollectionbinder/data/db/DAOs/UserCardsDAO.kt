@@ -10,9 +10,6 @@ interface UserCardsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCard(card: PokemonCard)
 
-    @Query("SELECT * FROM pokemonCardsTable WHERE card_name LIKE :search " + "OR card_evolvesFrom LIKE :search " + "OR card_seriesName LIKE :search " + "OR card_setName LIKE :search")
-    fun searchCards(search: String) : LiveData<List<PokemonCard>>
-
     @Query("SELECT * FROM pokemonCardsTable")
     fun getAllCards() : LiveData<List<PokemonCard>>
 

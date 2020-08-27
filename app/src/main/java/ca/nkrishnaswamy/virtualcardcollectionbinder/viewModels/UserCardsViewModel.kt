@@ -31,10 +31,6 @@ class UserCardsViewModel(application: Application) : AndroidViewModel(applicatio
         repository.deleteCard(card)
     }
 
-    fun searchCardsFromDb(search: String): LiveData<List<PokemonCard>>{
-        return repository.searchCards(search)
-    }
-
     suspend fun retrieveCardsFromApi(cardName: String, hp: String, setName: String, pokeCardNumber: String): List<PokemonCard>{
         val cardsList =  repository.getUserCardsFromApi(context, cardName, hp, setName, pokeCardNumber)
         return cardsList
