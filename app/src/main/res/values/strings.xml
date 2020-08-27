@@ -13,5 +13,6 @@
     <string name = "errorNoInternet">Error! Device not connected to the Internet.</string>
     <string name = "deleteAllCardsLabel">Remove All Cards From Collection</string>
     <string name = "deleteAllCardsNotification">Removed all cards from collection.</string>
+    <string name = "searchButtonTitle">Search</string>
 
 </resources>

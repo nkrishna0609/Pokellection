@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/search_item"
+        android:title="@string/searchButtonTitle"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
     <item android:id="@+id/deleteAllCards"
         android:title="@string/deleteAllCardsLabel"
         app:showAsAction="never" />

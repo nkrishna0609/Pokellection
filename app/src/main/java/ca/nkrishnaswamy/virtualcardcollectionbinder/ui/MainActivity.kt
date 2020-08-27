@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +21,7 @@ import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.NoConnectionException
 import ca.nkrishnaswamy.virtualcardcollectionbinder.viewModels.UserCardsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
@@ -26,13 +29,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: UserCardsViewModel
     private val newCardActivityRequestCode = 1
+    lateinit private var adapter: PokemonCardRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.pokeCard_recycler_view)
-        val adapter = PokemonCardRecyclerAdapter(this)
+        adapter = PokemonCardRecyclerAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -52,23 +56,38 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
+
+        val searchCard: MenuItem? = menu?.findItem(R.id.search_item)
+        val searchView: SearchView = searchCard?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.deleteAllCards ->
+            R.id.deleteAllCards -> {
                 CoroutineScope(IO).launch {
-                        viewModel.deleteAllCards()
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                applicationContext,
-                                R.string.deleteAllCardsNotification,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
+                    viewModel.deleteAllCards()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            applicationContext,
+                            R.string.deleteAllCardsNotification,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
-
+            }
         }
         return super.onOptionsItemSelected(item)
     }
