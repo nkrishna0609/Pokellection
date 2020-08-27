@@ -15,5 +15,6 @@
     <string name = "deleteAllCardsNotification">Removed all cards from collection.</string>
     <string name = "searchButtonTitle">Search</string>
     <string name = "cardDeletedNotif">Card deleted.</string>
+    <string name = "addedCardNotif">Card added to collection.</string>
 
 </resources>

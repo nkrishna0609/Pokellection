@@ -19,7 +19,6 @@ import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.NoConnectionException
 import ca.nkrishnaswamy.virtualcardcollectionbinder.viewModels.UserCardsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 
@@ -110,10 +109,11 @@ class MainActivity : AppCompatActivity() {
             val pokeCardSetName: String = data?.getStringExtra("cardSetName").toString()
             val cardSetName: String = ampersandRemover(pokeCardSetName)
             val pokeCardSetNum = data?.getStringExtra("cardSetNum").toString()
+            val cardSetNum: String = enteredSetNumChecker(pokeCardSetNum)
 
             CoroutineScope(IO).launch {
                 try {
-                    val cardsList: List<PokemonCard> = viewModel.retrieveCardsFromApi(cardName, "", cardSetName, pokeCardSetNum)
+                    val cardsList: List<PokemonCard> = viewModel.retrieveCardsFromApi(cardName, "", cardSetName, cardSetNum)
 
                     if (cardsList.isEmpty()) {
                         withContext(Dispatchers.Main) {
@@ -125,8 +125,10 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     else {
-                        for (x in cardsList) {
-                            viewModel.insertCard(x)
+                        if (cardsList.size==1) {
+                            for (x in cardsList) {
+                                viewModel.insertCard(x)
+                            }
                         }
                     }
 
@@ -143,11 +145,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun ampersandRemover(name: String ): String{
         var changed: String=name
         if (changed.contains(" and ")){
             changed = changed.replace(" and "," \u0026 ")
+        }
+        return changed
+    }
+
+    private fun enteredSetNumChecker(num: String): String {
+        var changed: String = num
+        if (changed.contains("/")){
+            changed = changed.substring(0,changed.indexOf("/"))
         }
         return changed
     }
