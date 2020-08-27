@@ -4,8 +4,8 @@
     <string name = "cardNameEditBox">Card Name</string>
     <string name = "cardSetNameLabel">Set Name:</string>
     <string name = "cardSetNameEditBox">Set Name</string>
-    <string name = "cardSetNumLabel">Set Number:</string>
-    <string name = "cardSetNumEditBox">Set Number</string>
+    <string name = "cardSetNumLabel">Card Number:</string>
+    <string name = "cardSetNumEditBox">Card Number</string>
     <string name = "buttonCardSearch">Search</string>
     <string name = "buttonCancel">Cancel</string>
     <string name = "errorEmptyStrings">Error! Enter card name, set name, and set number.</string>
