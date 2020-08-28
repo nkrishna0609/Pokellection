@@ -36,7 +36,10 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                     hp = jsonCardDetails.get("hp").asString
                 }
                 val setNum = jsonCardDetails.get("number").asString
-                val rarity = jsonCardDetails.get("rarity").asString
+                var rarity = ""                                                     //not applicable to every card
+                if (jsonCardDetails.has("rarity")){
+                    rarity = jsonCardDetails.get("rarity").asString
+                }
                 val series = jsonCardDetails.get("series").asString
                 val setName = jsonCardDetails.get("set").asString
                 val setCode = jsonCardDetails.get("setCode").asString

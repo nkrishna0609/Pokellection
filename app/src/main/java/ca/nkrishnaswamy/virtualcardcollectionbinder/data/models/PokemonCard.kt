@@ -1,8 +1,11 @@
 package ca.nkrishnaswamy.virtualcardcollectionbinder.data.models
 
+import android.os.Parcelable
 import androidx.room.*
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.typeConverters.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "pokemonCardsTable", indices = [Index(value=["card_setName","card_num"],unique = true)])
 data class PokemonCard(
     @ColumnInfo(name="card_name")
@@ -45,7 +48,7 @@ data class PokemonCard(
     @ColumnInfo(name="card_ability")
     @TypeConverters(PokemonAbilityTypeConverter::class)
     private var ability: PokemonCardAbility
-)
+): Parcelable
 {
     @PrimaryKey(autoGenerate = true)
     private var id: Int = 0

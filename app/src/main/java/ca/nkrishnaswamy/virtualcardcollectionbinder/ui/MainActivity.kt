@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -131,6 +132,13 @@ class MainActivity : AppCompatActivity() {
                             for (x in cardsList) {
                                 viewModel.insertCard(x)
                             }
+                        }
+                        else{
+                            val selectCardIntent = Intent(this@MainActivity, ConfirmCardActivity::class.java)
+                            val bundle=Bundle()
+                            bundle.putParcelableArrayList("cardsList",cardsList as ArrayList<out Parcelable>?)
+                            selectCardIntent.putExtras(bundle)
+                            startActivity(selectCardIntent)
                         }
                     }
 
