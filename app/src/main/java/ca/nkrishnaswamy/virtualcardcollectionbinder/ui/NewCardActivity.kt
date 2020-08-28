@@ -27,14 +27,18 @@ class NewCardActivity : AppCompatActivity() {
         val searchButton = findViewById<Button>(R.id.buttonSearch)
         searchButton.setOnClickListener{
             val searchCardIntent = Intent()
-            if (TextUtils.isEmpty(editCardSetName.text) || TextUtils.isEmpty(editCardSetNum.text) || TextUtils.isEmpty(editCardSetNum.text)){
+            if (TextUtils.isEmpty(editCardName.text) || TextUtils.isEmpty(editCardSetNum.text)){
                 setResult(Activity.RESULT_CANCELED, searchCardIntent)
                 Toast.makeText(applicationContext, R.string.errorEmptyStrings, Toast.LENGTH_LONG).show()
             }
             else{
                 val cardName = editCardName.text.toString()
-                val cardSetName = editCardSetName.text.toString()
                 val cardSetNum = editCardSetNum.text.toString()
+                val cardSetName: String = if (TextUtils.isEmpty(editCardSetName.text)){
+                    ""
+                }else{
+                    editCardSetName.text.toString()
+                }
 
                 searchCardIntent.putExtra("cardName",cardName)
                 searchCardIntent.putExtra("cardSetName",cardSetName)

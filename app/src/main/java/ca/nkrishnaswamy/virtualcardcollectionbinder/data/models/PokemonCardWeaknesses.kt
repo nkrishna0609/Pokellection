@@ -11,10 +11,4 @@ data class PokemonCardWeaknesses (
     fun getPokemonWeaknessAmount():String{
         return value
     }
-/*
-    override fun toString(): String {
-        return "$type - $value"
-    }
-
-     */
 }

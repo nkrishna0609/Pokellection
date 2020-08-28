@@ -4,14 +4,14 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.db.DAOs.UserCardsDAO
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
-import ca.nkrishnaswamy.virtualcardcollectionbinder.network.ApiService
+import ca.nkrishnaswamy.virtualcardcollectionbinder.network.PokeCardApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CardsRepository(private val cardDao: UserCardsDAO) {
 
     suspend fun getUserCardsFromApi(context: Context, cardName: String,hp:String,setName: String, pokeCardNumber: String) = withContext(Dispatchers.IO){
-        val apiService = ApiService(context = context)
+        val apiService = PokeCardApiService(context = context)
         apiService.getCardPage(cardName, hp, setName, pokeCardNumber).await().getPokemonCards()
     }
 

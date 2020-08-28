@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.NewCardActivity">
+
+    <LinearLayout
+        android:id="@+id/selectCardLabelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/selectCardLabelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlack"
+            android:text="@string/userPickCardLabel"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userSelectCard_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/selectCardLabelLayout"
+        android:layout_above="@+id/buttonCancel2"
+        tools:listitem="@layout/layout_poke_card_list"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <Button
+        android:id="@+id/buttonCancel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="20dp"
+        android:background="@color/colorRed"
+        android:text="@string/buttonCancel"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAllCaps="true"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

@@ -14,7 +14,7 @@ import retrofit2.http.Query
 
 const val baseUrl = "https://api.pokemontcg.io/v1/"
 
-interface ApiService {
+interface PokeCardApiService {
     @GET("cards")
     fun getCardPage(
         @Query("name") cardName: String,
@@ -24,7 +24,7 @@ interface ApiService {
     ): Deferred<PokemonCardPageResponse>
 
     companion object {
-        operator fun invoke(context: Context): ApiService {
+        operator fun invoke(context: Context): PokeCardApiService {
             val reqInterceptor = Interceptor {chain ->
 
                 val url = chain.request().url.newBuilder().addQueryParameter("cards","?").build()
@@ -36,7 +36,7 @@ interface ApiService {
             ).build()
             val pokeCardPageDeserializer = GsonBuilder().registerTypeAdapter(PokemonCardPageResponse::class.java, GetPokemonCardPageDeserializer()).create()
 
-            return Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addCallAdapterFactory(CoroutineCallAdapterFactory()).addConverterFactory(GsonConverterFactory.create(pokeCardPageDeserializer)).build().create(ApiService::class.java)
+            return Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addCallAdapterFactory(CoroutineCallAdapterFactory()).addConverterFactory(GsonConverterFactory.create(pokeCardPageDeserializer)).build().create(PokeCardApiService::class.java)
         }
     }
 }

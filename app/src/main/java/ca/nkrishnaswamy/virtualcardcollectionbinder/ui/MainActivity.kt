@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         val addCardButton = findViewById<FloatingActionButton>(R.id.add_card_button)
         addCardButton.setOnClickListener {
-                val intent = Intent(this@MainActivity, NewCardActivity::class.java)
-                startActivityForResult(intent, newCardActivityRequestCode)
+            val intent = Intent(this@MainActivity, NewCardActivity::class.java)
+            startActivityForResult(intent, newCardActivityRequestCode)
         }
 
         ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){

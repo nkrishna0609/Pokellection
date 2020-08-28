@@ -9,7 +9,7 @@ data class PokemonCardAttacks(
     protected val name: String,
     protected val text: String,
     protected val damage: String,
-    protected val convertedEnergyCost: Int) {
+    protected val convertedEnergyCost: Int){
 
     fun getAttackCosts():ArrayList<String>{
         return cost
@@ -29,24 +29,4 @@ data class PokemonCardAttacks(
     fun getPokemonAttacEnergyCost():Int{
         return convertedEnergyCost
     }
-    /*
-    override fun toString():String{
-        return "\t\t\tName: $name\n\t\t\tDescription: $text\n\t\t\tDamage: $damage\n\t\t\tCost: ${costToString()}"
-    }
-
-    fun costToString():String{
-        var output=""
-        var separator = ""
-
-        for (cost in cost){
-            output=output+separator + cost
-            separator = ", "
-        }
-
-        return output
-    }
-
-
-
- */
 }

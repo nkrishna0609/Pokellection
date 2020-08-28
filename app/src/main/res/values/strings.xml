@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">Virtual Card Collection Binder</string>
-    <string name = "cardNameLabel">Card Name:</string>
-    <string name = "cardNameEditBox">Card Name</string>
-    <string name = "cardSetNameLabel">Set Name:</string>
-    <string name = "cardSetNameEditBox">Set Name</string>
-    <string name = "cardSetNumLabel">Card Number:</string>
-    <string name = "cardSetNumEditBox">Card Number</string>
-    <string name = "buttonCardAdd">Add Card</string>
-    <string name = "buttonCancel">Cancel</string>
-    <string name = "errorEmptyStrings">Error! Enter card name, set name, and set number.</string>
-    <string name = "errorCardNotFound">Error! Card not found.</string>
-    <string name = "errorNoInternet">Error! Device not connected to the Internet.</string>
-    <string name = "deleteAllCardsLabel">Remove All Cards From Collection</string>
-    <string name = "deleteAllCardsNotification">Removed all cards from collection.</string>
-    <string name = "searchButtonTitle">Search</string>
-    <string name = "cardDeletedNotif">Card deleted.</string>
-    <string name = "addedCardNotif">Card added to collection.</string>
-
+    <string name="cardNameLabel">Card Name:</string>
+    <string name="cardNameEditBox">Card Name</string>
+    <string name="cardSetNameLabel">Set Name:</string>
+    <string name="cardSetNameEditBox">Set Name</string>
+    <string name="cardSetNumLabel">Card Number:</string>
+    <string name="cardSetNumEditBox">Card Number</string>
+    <string name="buttonCardAdd">Add Card</string>
+    <string name="buttonCancel">Cancel</string>
+    <string name="errorEmptyStrings">Error! Enter card name and set number.</string>
+    <string name="errorCardNotFound">Error! Card not found.</string>
+    <string name="errorNoInternet">Error! Device not connected to the Internet.</string>
+    <string name="deleteAllCardsLabel">Remove All Cards From Collection</string>
+    <string name="deleteAllCardsNotification">Removed all cards from collection.</string>
+    <string name="searchButtonTitle">Search</string>
+    <string name="cardDeletedNotif">Card deleted.</string>
+    <string name="addedCardNotif">Card added to collection.</string>
+    <string name="userPickCardLabel">Select the card which you want to add to your collection. </string>
 </resources>
