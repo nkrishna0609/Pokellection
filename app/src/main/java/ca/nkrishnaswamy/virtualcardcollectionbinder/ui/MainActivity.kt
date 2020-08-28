@@ -2,7 +2,6 @@ package ca.nkrishnaswamy.virtualcardcollectionbinder.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
@@ -11,7 +10,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -29,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: UserCardsViewModel
     private val newCardActivityRequestCode = 1
+    private val confirmCardActivityRequestCode=2
     private lateinit var adapter: PokemonCardRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -138,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                             val bundle=Bundle()
                             bundle.putParcelableArrayList("cardsList",cardsList as ArrayList<out Parcelable>?)
                             selectCardIntent.putExtras(bundle)
-                            startActivity(selectCardIntent)
+                            startActivityForResult(selectCardIntent,confirmCardActivityRequestCode )
                         }
                     }
 
@@ -153,6 +152,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+        if((requestCode==confirmCardActivityRequestCode) && (resultCode== Activity.RESULT_OK)){
+            val selectedCard: PokemonCard = data?.getParcelableExtra<PokemonCard>("userSelectedCard")!!
+            viewModel.insertCard(selectedCard)
         }
     }
     private fun ampersandRemover(name: String ): String{
