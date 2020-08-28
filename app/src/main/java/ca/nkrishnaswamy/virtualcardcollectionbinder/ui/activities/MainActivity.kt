@@ -1,4 +1,4 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.ui
+package ca.nkrishnaswamy.virtualcardcollectionbinder.ui.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ca.nkrishnaswamy.virtualcardcollectionbinder.R
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
 import ca.nkrishnaswamy.virtualcardcollectionbinder.network.NoConnectionException
+import ca.nkrishnaswamy.virtualcardcollectionbinder.ui.recyclerviewAdaptors.PokemonCardRecyclerAdapter
 import ca.nkrishnaswamy.virtualcardcollectionbinder.viewModels.UserCardsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.*

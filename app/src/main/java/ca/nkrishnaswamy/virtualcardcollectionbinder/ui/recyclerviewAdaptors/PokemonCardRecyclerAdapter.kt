@@ -1,4 +1,4 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.ui
+package ca.nkrishnaswamy.virtualcardcollectionbinder.ui.recyclerviewAdaptors
 
 import android.content.Context
 import android.view.LayoutInflater

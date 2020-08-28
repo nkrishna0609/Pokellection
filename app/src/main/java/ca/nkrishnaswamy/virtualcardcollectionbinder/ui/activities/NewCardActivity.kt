@@ -1,4 +1,4 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.ui
+package ca.nkrishnaswamy.virtualcardcollectionbinder.ui.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -27,7 +27,7 @@ class NewCardActivity : AppCompatActivity() {
         val searchButton = findViewById<Button>(R.id.buttonSearch)
         searchButton.setOnClickListener{
             val searchCardIntent = Intent()
-            if (TextUtils.isEmpty(editCardName.text) || TextUtils.isEmpty(editCardSetNum.text)){
+            if (TextUtils.isEmpty(editCardName.text)){
                 setResult(Activity.RESULT_CANCELED, searchCardIntent)
                 Toast.makeText(applicationContext, R.string.errorEmptyStrings, Toast.LENGTH_LONG).show()
             }

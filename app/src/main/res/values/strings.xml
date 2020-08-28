@@ -8,7 +8,7 @@
     <string name="cardSetNumEditBox">Card Number</string>
     <string name="buttonCardAdd">Add Card</string>
     <string name="buttonCancel">Cancel</string>
-    <string name="errorEmptyStrings">Error! Enter card name and set number.</string>
+    <string name="errorEmptyStrings">Error! Enter card name.</string>
     <string name="errorCardNotFound">Error! Card not found.</string>
     <string name="errorNoInternet">Error! Device not connected to the Internet.</string>
     <string name="deleteAllCardsLabel">Remove All Cards From Collection</string>

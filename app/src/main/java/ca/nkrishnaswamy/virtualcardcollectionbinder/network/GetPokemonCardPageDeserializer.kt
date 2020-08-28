@@ -10,10 +10,10 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
         val cardList = arrayListOf<PokemonCard>()
         val jsonCard = json?.asJsonObject
 
-        var jsonArrayCard: JsonArray? = jsonCard?.get("cards")?.asJsonArray
+        val jsonArrayCard: JsonArray? = jsonCard?.get("cards")?.asJsonArray
 
         if (jsonArrayCard != null) {
-            for (i in 0..(jsonArrayCard.size() - 1)) {
+            for (i in 0 until jsonArrayCard.size()) {
                 var jsonCardDetails: JsonObject? = jsonArrayCard.get(i).asJsonObject
                 val name = jsonCardDetails?.get("name")?.asString
                 val image = jsonCardDetails?.get("imageUrlHiRes")?.asString
@@ -21,7 +21,7 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 if (jsonCardDetails!!.has("types")) {
                     val typesDetails = jsonCardDetails.get("types").asJsonArray
                     typesList = ArrayList<String>()
-                    for (x in 0..(typesDetails.size() - 1)) {
+                    for (x in 0 until typesDetails.size()) {
                         typesList.add(typesDetails.get(x).asString)
                     }
                 }
@@ -47,15 +47,18 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 if (jsonCardDetails.has("attacks")) {
                     val attacks = jsonCardDetails.get("attacks").asJsonArray
                     attacksList = ArrayList<PokemonCardAttacks>()
-                    for (a in 0..(attacks.size() - 1)) {
+                    for (a in 0 until attacks.size()) {
                         val jsonAttackDetails: JsonObject? = attacks.get(a).asJsonObject
                         val name = jsonAttackDetails?.get("name")?.asString
-                        val text = jsonAttackDetails?.get("text")?.asString
+                        var text =""
+                        if (jsonAttackDetails?.has("text")!!){
+                            text = jsonAttackDetails?.get("text")?.asString!!
+                        }
                         val damage = jsonAttackDetails?.get("damage")?.asString
                         val intEnergyCost = jsonAttackDetails?.get("convertedEnergyCost")?.asInt
                         val energyCost = jsonAttackDetails?.get("cost")?.asJsonArray
                         var listCost = ArrayList<String>()
-                        for (x in 0..(energyCost!!.size() - 1)) {
+                        for (x in 0 until energyCost!!.size()) {
                             listCost.add(energyCost.get(x).asString)
                         }
                         val thisAttack =
@@ -73,7 +76,7 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 if (jsonCardDetails.has("weaknesses")) {
                     val weaknesses = jsonCardDetails.get("weaknesses").asJsonArray
                     weaknessesList = ArrayList<PokemonCardWeaknesses>()
-                    for (w in (0..weaknesses.size() - 1)) {
+                    for (w in (0 until weaknesses.size())) {
                         val jsonWeaknessDetails: JsonObject? = weaknesses.get(w).asJsonObject
                         val type = jsonWeaknessDetails?.get("type")?.asString
                         val value = jsonWeaknessDetails?.get("value")?.asString
@@ -89,7 +92,7 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 if (jsonCardDetails.has("resistances")) {
                     var resistances = jsonCardDetails.get("resistances").asJsonArray
                     resistancesList = ArrayList<PokemonCardResistances>()
-                    for (r in (0..resistances.size() - 1)) {
+                    for (r in (0 until resistances.size())) {
                         val jsonResistanceDetails: JsonObject? = resistances.get(r).asJsonObject
                         val type = jsonResistanceDetails?.get("type")?.asString
                         val value = jsonResistanceDetails?.get("value")?.asString
@@ -122,7 +125,9 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                     var abilityDetails = jsonCardDetails.get("ability").asJsonObject
                     abilityName = abilityDetails.get("name").asString
                     abilityText = abilityDetails.get("text").asString
-                    abilityType = abilityDetails.get("type").asString
+                    if (abilityDetails.has("type")){
+                        abilityType = abilityDetails.get("type").asString
+                    }
                 }
                 var ability =
                     PokemonCardAbility(
@@ -156,12 +161,9 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
             }
         }
 
-        val pokePage =
-            PokemonCardPageResponse(
-                cardList
-            )
-
-        return pokePage
+        return PokemonCardPageResponse(
+            cardList
+        )
     }
 
 

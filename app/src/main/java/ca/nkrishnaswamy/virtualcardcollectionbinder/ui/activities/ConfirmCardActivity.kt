@@ -1,4 +1,4 @@
-package ca.nkrishnaswamy.virtualcardcollectionbinder.ui
+package ca.nkrishnaswamy.virtualcardcollectionbinder.ui.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.nkrishnaswamy.virtualcardcollectionbinder.R
 import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCard
+import ca.nkrishnaswamy.virtualcardcollectionbinder.ui.recyclerviewAdaptors.ConfirmCardRecyclerAdapter
 
 private lateinit var recyclerView: RecyclerView
 private lateinit var adapter: ConfirmCardRecyclerAdapter
