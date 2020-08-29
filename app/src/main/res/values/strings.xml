@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Virtual Card Collection Binder</string>
+    <string name="app_name">Pok\u00E9llection</string>
     <string name="cardNameLabel">Card Name:</string>
     <string name="cardNameEditBox">Card Name</string>
     <string name="cardSetNameLabel">Set Name:</string>
@@ -11,7 +11,7 @@
     <string name="errorEmptyStrings">Error! Enter card name.</string>
     <string name="errorCardNotFound">Error! Card not found.</string>
     <string name="errorNoInternet">Error! Device not connected to the Internet.</string>
-    <string name="deleteAllCardsLabel">Remove All Cards From Collection</string>
+    <string name="deleteAllCardsLabel">Remove all cards from collection</string>
     <string name="deleteAllCardsNotification">Removed all cards from collection.</string>
     <string name="searchButtonTitle">Search</string>
     <string name="cardDeletedNotif">Card deleted.</string>
