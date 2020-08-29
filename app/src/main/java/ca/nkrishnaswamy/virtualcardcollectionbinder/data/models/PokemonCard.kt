@@ -51,12 +51,12 @@ data class PokemonCard(
 ): Parcelable
 {
     @PrimaryKey(autoGenerate = true)
-    private var id: Int = 0
+    private var id: Long = 0
 
-    fun getId(): Int{
+    fun getId(): Long{
         return id
     }
-    fun setId(num: Int){
+    fun setId(num: Long){
         id=num
     }
 
