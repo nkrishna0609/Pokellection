@@ -71,6 +71,22 @@ class UnitTests {
     }
 
     @Test
+    fun searchApiForMultipleCardsTest() {
+        val cardsDao = db.localPokeCardDao()
+        val repository = CardsRepository(cardsDao)
+        CoroutineScope(Dispatchers.IO).launch {
+            val cardsList = repository.getUserCardsFromApi(
+                context,
+                "Charizard",
+                "",
+                "",
+                "19"
+            )
+            assertEquals(2, cardsList.size)
+        }
+    }
+
+    @Test
     @Throws(Exception::class)
     fun enterCardIntoDbTest() {
         val cardsDao = db.localPokeCardDao()
