@@ -5,27 +5,24 @@ import ca.nkrishnaswamy.virtualcardcollectionbinder.data.models.PokemonCardAbili
 import com.google.gson.Gson
 
 class PokemonAbilityTypeConverter {
-    val gson= Gson()
+    private val gson= Gson()
 
 
     @TypeConverter
     fun convertPokeAbilityToString(ability: PokemonCardAbility): String{
-        if (ability.getAbilityName().isNullOrEmpty()) {
-            return "Not applicable to this card."
-        }
-        else {
-            return gson.toJson(ability)
+        return if (ability.getAbilityName().isNullOrEmpty()) {
+            "Not applicable to this card."
+        } else {
+            gson.toJson(ability)
         }
     }
 
     @TypeConverter
     fun convertStringToPokeAbility(data: String): PokemonCardAbility{
-        if (data == "Not applicable to this card." ) {
-
-            return PokemonCardAbility("","","")
-        }
-        else {
-            return gson.fromJson(data, PokemonCardAbility::class.java)
+        return if (data == "Not applicable to this card." ) {
+            PokemonCardAbility("","","")
+        } else {
+            gson.fromJson(data, PokemonCardAbility::class.java)
         }
     }
 

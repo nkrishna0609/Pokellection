@@ -6,25 +6,23 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class PokemonAttacksArrayListTypeConverters {
-    val gson= Gson()
+    private val gson= Gson()
     @TypeConverter
     fun convertPokeAttacksArrayListToString(attacksList: ArrayList<PokemonCardAttacks>): String{
 
-        if (attacksList.isNullOrEmpty()){
-            return "Not applicable to this card."
-        }
-        else{
-            return gson.toJson(attacksList, object: TypeToken<ArrayList<PokemonCardAttacks>>() {}.type)
+        return if (attacksList.isNullOrEmpty()){
+            "Not applicable to this card."
+        } else{
+            gson.toJson(attacksList, object: TypeToken<ArrayList<PokemonCardAttacks>>() {}.type)
         }
     }
 
     @TypeConverter
     fun convertStringToPokeAttacksArrayList(data: String): ArrayList<PokemonCardAttacks>{
-        if (data == "Not applicable to this card." ){
-            return arrayListOf<PokemonCardAttacks>()
-        }
-        else{
-            return gson.fromJson(data, object: TypeToken<ArrayList<PokemonCardAttacks>>() {}.type)
+        return if (data == "Not applicable to this card." ){
+            arrayListOf<PokemonCardAttacks>()
+        } else{
+            gson.fromJson(data, object: TypeToken<ArrayList<PokemonCardAttacks>>() {}.type)
         }
     }
 }

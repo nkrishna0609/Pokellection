@@ -16,7 +16,7 @@ const val baseUrl = "https://api.pokemontcg.io/v1/"
 
 interface PokeCardApiService {
     @GET("cards")
-    fun getCardPage(
+    fun getCardPageAsync(
         @Query("name") cardName: String,
         @Query("hp") hp: String,
         @Query("set") setName: String,

@@ -64,79 +64,40 @@ data class PokemonCard(
         return ability
     }
 
-    fun setAbility(newAbility: PokemonCardAbility) {
-        ability = newAbility
-    }
-
     fun getAncientTrait(): PokemonCardAncientTrait {
         return ancientTrait
     }
-    fun setAncientTrait(newTrait: PokemonCardAncientTrait) {
-        ancientTrait = newTrait
-    }
+
     fun getTypes():ArrayList<String>{
         return types
-    }
-
-    fun setTypes(newTypes: ArrayList<String>){
-        types = newTypes
     }
 
     fun getAttacks():ArrayList<PokemonCardAttacks>{
         return attacks
     }
 
-    fun setAttacks(newAttacks: ArrayList<PokemonCardAttacks>){
-        attacks = newAttacks
-    }
-
     fun getWeaknesses():ArrayList<PokemonCardWeaknesses>{
         return weaknesses
-    }
-
-    fun setWeaknesses(newWeaknesses: ArrayList<PokemonCardWeaknesses>){
-        weaknesses = newWeaknesses
     }
 
     fun getResistances():ArrayList<PokemonCardResistances>{
         return resistances
     }
 
-    fun setResistances(newResists: ArrayList<PokemonCardResistances>){
-        resistances = newResists
-    }
-
     fun getName():String{
         return name
     }
 
-    fun setName(newName: String){
-        name= newName
-    }
-
-
     fun getImageUrlHiRes():String{
         return imageUrlHiRes
-    }
-
-    fun setImageUrlHiRes(newImg: String){
-        imageUrlHiRes = newImg
     }
 
     fun getSupertype():String{
         return supertype
     }
 
-    fun setSupertype(newType: String){
-        supertype = newType
-    }
-
     fun getSubtype():String{
         return subtype
-    }
-
-    fun setSubtype(newType: String){
-        subtype = newType
     }
 
     fun getEvolvesFrom():String{
@@ -148,10 +109,6 @@ data class PokemonCard(
         }
     }
 
-    fun setEvolvesFrom(newEvolves: String){
-        evolvesFrom = newEvolves
-    }
-
     fun getHp():String{
         if (hp.isNullOrEmpty()){
             return "Not applicable to this card."
@@ -161,48 +118,26 @@ data class PokemonCard(
         }
     }
 
-    fun setHp(newHp: String){
-        hp = newHp
-    }
-
     fun getNumber():String{
         return number
-    }
-
-    fun setNumber(newSet:String){
-        number = newSet
     }
 
     fun getRarity():String{
         return rarity
     }
 
-    fun setRarity(newSet:String){
-        rarity = newSet
-    }
     fun getSeries():String{
         return series
-    }
-
-    fun setSeries(newSeries:String){
-        series = newSeries
     }
 
     fun getSet():String{
         return set
     }
 
-    fun setSet(newSet: String){
-        set=newSet
-    }
-
     fun getSetCode():String{
         return setCode
     }
 
-    fun setSetCode(newCode: String){
-        setCode = newCode
-    }
     override fun toString():String{
         return "$name - $set $number"
     }

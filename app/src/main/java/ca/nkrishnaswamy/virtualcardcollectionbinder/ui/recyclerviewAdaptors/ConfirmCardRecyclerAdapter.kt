@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_poke_card_list.view.*
 
 class ConfirmCardRecyclerAdapter internal constructor(context: Context,
-                                                      val itemClickListener: OnItemClickListener
+                                                      private val itemClickListener: OnItemClickListener
 ): RecyclerView.Adapter<ConfirmCardRecyclerAdapter.PokeCardViewHolder>() {
 
     private val inflator: LayoutInflater = LayoutInflater.from(context)
