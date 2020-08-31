@@ -8,7 +8,7 @@ Simply enter the card's name, set name as well as set number to store it in your
 
 Sadly parting with a card in your real-life collection? Update your Pokéllection by simply swiping on the card which you want to say goodbye to.
 
-No WiFi? No worries. Pokéllection can display your beautiful collection offline. You can resume adding cards to your collection once you reconnect to WiFi.
+No WiFi? No worries. Pokéllection can display your beautiful collection offline. You can resume adding cards to your collection once you reconnect to Wi-Fi.
 
 Download Pokéllection and be the greatest Pokémon card collector among your friends today!
 
