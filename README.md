@@ -12,5 +12,5 @@ No WiFi? No worries. Pokéllection can display your beautiful collection offline
 
 Download Pokéllection and be the greatest Pokémon card collector among your friends today!
 
-## Design Pattern Choice ##
+## Architecture ##
 This app was built using the MVVM design pattern, which ensures that there is separation between the Models and the Views. This introduces scalability/maintainability within the code, since the user interface is not dependent on the business logic. If the business logic code were to be changed/improved, there wouldn't be a need to do the same with the UI code due to the separation between the Models and the Views. Moreover, MVVM allows for easier testing, since the UI components can be tested separately from the business logic components. This separation of unit testing and instrumentation/UI testing allows for efficient test-driven development.
