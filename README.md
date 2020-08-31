@@ -1,4 +1,5 @@
 # Pokéllection
+![logo](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_feature_graphic.png)
 Carry your entire Pokémon card collection in your pocket. Pokéllection allows you to store all your Pokémon cards in one convenient place; on your phone.
 
 ## Description of Functionalities ##
