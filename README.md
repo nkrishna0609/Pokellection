@@ -2,6 +2,8 @@
 ![logo](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_feature_graphic.png)
 Carry your entire Pokémon card collection in your pocket. Pokéllection allows you to store all your Pokémon cards in one convenient place; on your phone.
 
+Video Demo: https://drive.google.com/file/d/1AoPdJztH9F9ZN3-JEszjLg_oW1uoGHrC/view?usp=sharing
+
 ## Description of Functionalities ##
 ![logo](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_ss.png)
 Simply enter the card's name, set name as well as set number to store it in your Pokéllection. You haven't memorized all 110+ Pokémon set names? Not to worry. Simply type in the name of your card, and identify which card is yours using the easy-to-navigate interface.
