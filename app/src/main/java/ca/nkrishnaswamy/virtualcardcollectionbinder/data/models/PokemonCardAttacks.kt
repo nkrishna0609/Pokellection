@@ -13,23 +13,4 @@ data class PokemonCardAttacks(
     protected val text: String,
     protected val damage: String,
     protected val convertedEnergyCost: Int): Parcelable{
-
-    fun getAttackCosts():ArrayList<String>{
-        return cost
-    }
-
-    fun getPokemonAttackName():String{
-        return name
-    }
-
-    fun getPokemonAttackText():String{
-        return text
-    }
-
-    fun getPokemonAttackDamage():String{
-        return damage
-    }
-    fun getPokemonAttacEnergyCost():Int{
-        return convertedEnergyCost
-    }
 }

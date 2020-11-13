@@ -11,9 +11,4 @@ data class PokemonCardAncientTrait(
     fun getTraitName(): String{
         return name
     }
-
-    fun getTraitText(): String{
-        return text
-    }
-
 }

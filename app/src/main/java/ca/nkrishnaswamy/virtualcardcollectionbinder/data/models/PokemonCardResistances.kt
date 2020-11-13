@@ -7,12 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class PokemonCardResistances(
     protected val type: String,
     protected val value: String): Parcelable{
-
-    fun getResistanceType():String{
-        return type
-    }
-
-    fun getPokemonResistanceAmount():String{
-        return value
-    }
 }

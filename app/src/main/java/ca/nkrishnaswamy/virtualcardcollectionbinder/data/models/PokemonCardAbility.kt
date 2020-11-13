@@ -12,12 +12,4 @@ data class PokemonCardAbility (
     fun getAbilityName(): String{
         return name
     }
-
-    fun getAbilityText(): String{
-        return text
-    }
-
-    fun getAbilityType(): String{
-        return type
-    }
 }
