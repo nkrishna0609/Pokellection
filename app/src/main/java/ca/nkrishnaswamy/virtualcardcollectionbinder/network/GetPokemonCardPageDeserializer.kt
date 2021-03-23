@@ -41,7 +41,10 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                     rarity = jsonCardDetails.get("rarity").asString
                 }
                 val series = jsonCardDetails.get("series").asString
-                val setName = jsonCardDetails.get("set").asString
+                var setName = ""                                                     //not applicable to every card
+                if (jsonCardDetails.has("set")){
+                    setName = jsonCardDetails.get("set").asString
+                }
                 val setCode = jsonCardDetails.get("setCode").asString
                 var attacksList = arrayListOf<PokemonCardAttacks>()                 //not applicable to every card
                 if (jsonCardDetails.has("attacks")) {
@@ -106,7 +109,7 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 }
                 var ancientTraitName = ""
                 var ancientTraitText = ""
-                if (jsonCardDetails.has("ancientTrait")) {                     //not applicable to every word
+                if (jsonCardDetails.has("ancientTrait")) {                     //not applicable to every card
                     val ancientTraitDetails = jsonCardDetails.get("ancientTrait").asJsonObject
                     ancientTraitName = ancientTraitDetails.get("name").asString
                     ancientTraitText = ancientTraitDetails.get("text").asString
@@ -121,7 +124,7 @@ class GetPokemonCardPageDeserializer: JsonDeserializer<PokemonCardPageResponse>{
                 var abilityName = ""
                 var abilityText = ""
                 var abilityType = ""
-                if (jsonCardDetails.has("ability")) {                          //not applicable to every word
+                if (jsonCardDetails.has("ability")) {                          //not applicable to every card
                     val abilityDetails = jsonCardDetails.get("ability").asJsonObject
                     abilityName = abilityDetails.get("name").asString
                     abilityText = abilityDetails.get("text").asString

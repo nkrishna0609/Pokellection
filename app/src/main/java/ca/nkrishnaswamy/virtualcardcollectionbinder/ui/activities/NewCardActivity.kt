@@ -34,11 +34,7 @@ class NewCardActivity : AppCompatActivity() {
             else{
                 val cardName = editCardName.text.toString()
                 val cardSetNum = editCardSetNum.text.toString()
-                val cardSetName: String = if (TextUtils.isEmpty(editCardSetName.text)){
-                    ""
-                }else{
-                    editCardSetName.text.toString()
-                }
+                val cardSetName = editCardSetName.text.toString()
 
                 searchCardIntent.putExtra("cardName",cardName)
                 searchCardIntent.putExtra("cardSetName",cardSetName)
