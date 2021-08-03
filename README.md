@@ -7,6 +7,7 @@ Carry your entire Pokémon card collection in your pocket. Pokéllection allows 
 * Utilized the **MVVM** architecture for modular, readable and scalable code
 * Makes GET request to third-party API with Retrofit/OkHttp, to retrieve a card out of 12 000+ possibilities and parses received-JSON with Gson for deserialization into POJO
 * Caches cards with Room Persistence Library
+* Ensured clean, bug-free code with unit/instrumentation testing via JUnit/Mockito/Espresso testing frameworks
 
 ## Overview
 Pokémon was a pivotal part of my childhood - from watching the shows, to collecting the cards. My younger brother himself recently got into the hobby of collecting Pokémon cards, and as of recent, his card binder is massive. I often notice him struggling to carry his binder around to show his friends his collection. So, I challenged myself to build an app which allows him to easily store and carry around his collection - on his phone!
