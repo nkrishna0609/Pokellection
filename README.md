@@ -1,27 +1,38 @@
 # Pokéllection
-![logo](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_feature_graphic.png)
+![Pokéllection Banner](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_feature_graphic.png)
 Carry your entire Pokémon card collection in your pocket. Pokéllection allows you to store all your Pokémon cards in one convenient place; on your phone.
 
-Video Demo: https://drive.google.com/file/d/1AoPdJztH9F9ZN3-JEszjLg_oW1uoGHrC/view?usp=sharing
+## TLDR
+* An **Android** app written in **Kotlin** which allows users to add, store, search for, and delete Pokémon cards from their collection 
+* Utilized the **MVVM** architecture for modular, readable and scalable code
+* Makes GET request to third-party API with Retrofit/OkHttp, to retrieve a card out of 12 000+ possibilities and parses received-JSON with Gson for deserialization into POJO
+* Caches cards with Room Persistence Library
 
-## Description of Functionalities ##
-![logo](https://github.com/nkrishna0609/Pokellection/blob/master/readmeImages/pokellection_ss.png)
-Simply enter the card's name, set name as well as set number to store it in your Pokéllection. You haven't memorized all 110+ Pokémon set names? Not to worry. Simply type in the name of your card, and identify which card is yours using the easy-to-navigate interface.
+## Overview
+Pokémon was a pivotal part of my childhood - from watching the shows, to collecting the cards. My younger brother himself recently got into the hobby of collecting Pokémon cards, and as of recent, his card binder is massive. I often notice him struggling to carry his binder around to show his friends his collection. So, I challenged myself to build an app which allows him to easily store and carry around his collection - on his phone!
 
-Sadly parting with a card in your real-life collection? Update your Pokéllection by simply swiping on the card which you want to say goodbye to.
+## Demo
+_**Please click on the image - it will take you to the YouTube video showcasing the app in action**_
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/FqfaR6qe-Ag/0.jpg)](https://www.youtube.com/watch?v=FqfaR6qe-Ag "Video Demo")
 
-No Wi-Fi? No worries. Pokéllection can display your beautiful collection offline. You can resume adding cards to your collection once you reconnect to Wi-Fi.
+## Technical Design Aspect
+### Built with
+* **Kotlin**
+  * Retrofit/OkHttp (REST/HTTP clients - for GET request to retrieve card data from API)
+  * Room (persistence of cards for offline storage)
+  * Gson (serialization/deserialization of POJO to JSON and vice versa)
 
-Download Pokéllection and be the greatest Pokémon card collector among your friends today!
+### MVVM architecture
+The Android app uses the MVVM architecture for modular, scalable, and maintainable code - by preventing tight coupling and "spaghetti" code. It ensures that the code has firm structure by making small classes with single responsibilities. 
 
-Disclaimer:
+As the name suggests, there are 3 components - the Models, the ViewModels, and the Views. 
+The MVVM architecture ensures that:
+* the Views do not contain business logic - they're solely present to handle the UI
+* the ViewModel has direct reference to the Repository which is the single source of truth - the Repository has reference to the remote data source logic and the local database
+* the ViewModel updates the View via LiveData - no need to manually update the View whenever the exposed data changes (the View observes the ViewModel)
 
-Pokéllection is an unofficial, free fan-made app and is NOT affiliated, endorsed or supported by Nintendo or The Pokémon Company in any way.
-Some images used in this app are copyrighted and are supported under fair use.
-Pokémon and Pokémon character names are trademarks of Nintendo.
-No copyright infringement intended.
+### Unit/Instrumentation Testing
+* Unit tests - tests logic of code
+* Instrumentation tests - tests functionality of app + UI
 
-Pokémon © 2002-2020 Pokémon. © 1995-2020 Nintendo/Creatures Inc.
-
-## Architecture ##
-This app was built using the MVVM design pattern, which ensures that there is separation between the Models and the Views. This introduces scalability/maintainability within the code, since the user interface is not dependent on the business logic. If the business logic code were to be changed/improved, there wouldn't be a need to do the same with the UI code due to the separation between the Models and the Views. Moreover, MVVM allows for easier testing, since the UI components can be tested separately from the business logic components. This separation of unit testing and instrumentation/UI testing allows for efficient test-driven development.
+Utilized JUnit/Mockito/Espresso frameworks to catch bugs/functionality errors in code.
